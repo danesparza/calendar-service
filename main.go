@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
@@ -93,8 +94,11 @@ func main() {
 		json.NewEncoder(w).Encode(events)
 	})
 
+	//	CORS handler
+	handler := cors.Default().Handler(r)
+
 	//	Indicate what port we're starting the service on
 	portString := strconv.Itoa(*port)
 	fmt.Println("Starting server on :", portString)
-	http.ListenAndServe(":"+portString, r)
+	http.ListenAndServe(":"+portString, handler)
 }
