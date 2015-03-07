@@ -77,9 +77,12 @@ func main() {
 		}
 
 		//	Get the list of events from now until the end of today
+		now := time.Now()
+		end := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local).Add(24 * time.Hour)
+
 		events, err := svc.Events.List(id).
-			TimeMin(time.Now().Format(time.RFC3339)).
-			TimeMax(time.Now().Truncate(24 * time.Hour).Add(24 * time.Hour).Format(time.RFC3339)).
+			TimeMin(now.Format(time.RFC3339)).
+			TimeMax(end.Format(time.RFC3339)).
 			SingleEvents(true).
 			OrderBy("startTime").Do()
 
