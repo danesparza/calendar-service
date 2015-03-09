@@ -14,6 +14,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -22,12 +23,14 @@ func main() {
 	port := flag.Int("port", 3000, "The port to listen on")
 	authEmail := flag.String("authEmail", "ReplaceWithSvcAcctEmail", "Service account email address")
 	authSubject := flag.String("authSubject", "user@domain.com", "Impersonated user email address")
+	allowedOrigins := flag.String("allowedOrigins", "*", "A comma-separated list of valid CORS origins")
+	keyFilePath := flag.String("keyFile", "key.pem", "The location of the PEM encoded private key")
 
 	//	Parse the command line for flags:
 	flag.Parse()
 
 	//	Read the key file in:
-	keydata, err := ioutil.ReadFile("key.pem")
+	keydata, err := ioutil.ReadFile(*keyFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,10 +101,15 @@ func main() {
 	})
 
 	//	CORS handler
-	handler := cors.Default().Handler(r)
+	c := cors.New(cors.Options{
+		AllowedOrigins:   strings.Split(*allowedOrigins, ","),
+		AllowCredentials: true,
+	})
+	handler := c.Handler(r)
 
 	//	Indicate what port we're starting the service on
 	portString := strconv.Itoa(*port)
+	fmt.Println("Allowed origins: ", *allowedOrigins)
 	fmt.Println("Starting server on :", portString)
 	http.ListenAndServe(":"+portString, handler)
 }
