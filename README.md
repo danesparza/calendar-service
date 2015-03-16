@@ -23,9 +23,9 @@ There are a few command line parameters available:
 
 Parameter       | Description
 ----------      | -----------
-authEmail       | authEmail description
-authSubject     | authSubject description
-keyFile         | keyFile description
+authEmail       | Service account email address, as listed in your [Google Developer's console](https://console.developers.google.com)
+authSubject     | The email address to impersonate.  The request will be made on behalf of this account, so you need ownership of this user account
+keyFile         | The location of the PEM encoded keyfile to authenticate your service account
 port            | The port the service listens on.  
 allowedOrigins  | comma seperated list of [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) origins to allow.  In order to access the service directly from a javascript application, you'll need to specify the origin you'll be running the javascript site on.  For example: http://www.myjavascriptapplication.com
 
@@ -36,4 +36,4 @@ Example: `http://yourdomain:3000/calendar/mg2l41ag8ua062trmktgdq6v90@group.calen
 
 To test your service quickly, you can use the [Postman Google Chrome Extension](https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm?hl=en) to call the service and see the JSON return format.
 
-Weather information will be returned as a [JSON payload outlined on the Google Calendar developer website](https://developers.google.com/google-apps/calendar/v3/reference/events).
+Calendar information will be returned as a [JSON payload outlined on the Google Calendar developer website](https://developers.google.com/google-apps/calendar/v3/reference/events).
