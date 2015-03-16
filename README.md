@@ -23,7 +23,7 @@ There are a few command line parameters available:
 
 Parameter       | Description
 ----------      | -----------
-authEmail       | Service account email address, as listed in your [Google Developer's console](https://console.developers.google.com)
+authEmail       | The OAuth 2.0 [service account email address](https://developers.google.com/console/help/new/#serviceaccounts), as listed in your project in the [Google Developer's console](https://console.developers.google.com)
 authSubject     | The email address to impersonate.  The request will be made on behalf of this account, so you need ownership of this user account
 keyFile         | The location of the PEM encoded keyfile to authenticate your service account
 port            | The port the service listens on.  
