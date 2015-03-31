@@ -3,6 +3,7 @@ A microservice to return Google calendar events in JSON format
 
 [![Build Status](https://drone.io/github.com/danesparza/calendar-service/status.png)](https://drone.io/github.com/danesparza/calendar-service/latest)
 
+### Prerequisites
 *To build, make sure you have the latest version of [Go](http://golang.org/) installed.  If you've never used Go before, it's a quick install and [there are installers for multiple platforms](http://golang.org/doc/install), including Windows, Linux and OSX.*
 
 ### Quick Start
