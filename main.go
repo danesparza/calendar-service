@@ -13,18 +13,52 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
 
+var (
+	//	Flags
+	port           = flag.Int("port", 3000, "The port to listen on")
+	authEmail      = flag.String("authEmail", "ReplaceWithSvcAcctEmail", "Service account email address")
+	authSubject    = flag.String("authSubject", "user@domain.com", "Impersonated user email address")
+	allowedOrigins = flag.String("allowedOrigins", "*", "A comma-separated list of valid CORS origins")
+	keyFilePath    = flag.String("keyFile", "key.pem", "The location of the PEM encoded private key")
+)
+
+func parseEnvironment() {
+	//	Check for the listen port
+	if env_port := os.Getenv("CALENDAR_PORT"); env_port != "" {
+		*port, _ = strconv.Atoi(env_port)
+	}
+
+	//	Check for allowed origins
+	if env_origins := os.Getenv("CALENDAR_ALLOWED_ORIGINS"); env_origins != "" {
+		*allowedOrigins = env_origins
+	}
+
+	//	Auth email
+	if env_auth_email := os.Getenv("CALENDAR_AUTHEMAIL"); env_auth_email != "" {
+		*authEmail = env_auth_email
+	}
+
+	//	Auth subject
+	if env_auth_subject := os.Getenv("CALENDAR_AUTHSUBJECT"); env_auth_subject != "" {
+		*authSubject = env_auth_subject
+	}
+
+	//	Key file path
+	if env_keyfilepath := os.Getenv("CALENDAR_KEYFILEPATH"); env_keyfilepath != "" {
+		*keyFilePath = env_keyfilepath
+	}
+
+}
+
 func main() {
-	//	Set up our flags
-	port := flag.Int("port", 3000, "The port to listen on")
-	authEmail := flag.String("authEmail", "ReplaceWithSvcAcctEmail", "Service account email address")
-	authSubject := flag.String("authSubject", "user@domain.com", "Impersonated user email address")
-	allowedOrigins := flag.String("allowedOrigins", "*", "A comma-separated list of valid CORS origins")
-	keyFilePath := flag.String("keyFile", "key.pem", "The location of the PEM encoded private key")
+	//	Parse environment variables:
+	parseEnvironment()
 
 	//	Parse the command line for flags:
 	flag.Parse()
