@@ -8,7 +8,7 @@ A microservice to return Google calendar events in JSON format
 
 ### Quick Start
 
-Run the following commands get latest and build.
+Run the following commands to get latest and build.
 
 ```bash
 go get github.com/danesparza/calendar-service
