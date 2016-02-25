@@ -1,7 +1,5 @@
-# calendar-service
+# calendar-service [![Circle CI](https://circleci.com/gh/danesparza/calendar-service.svg?style=svg)](https://circleci.com/gh/danesparza/calendar-service)
 A microservice to return Google calendar events in JSON format
-
-Build: [![Circle CI](https://circleci.com/gh/danesparza/calendar-service.svg?style=svg)](https://circleci.com/gh/danesparza/calendar-service)
 
 ### Prerequisites
 *To build, make sure you have the latest version of [Go](http://golang.org/) installed.  If you've never used Go before, it's a quick install and [there are installers for multiple platforms](http://golang.org/doc/install), including Windows, Linux and OSX.*
