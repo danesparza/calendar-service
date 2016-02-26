@@ -6,7 +6,7 @@ dependencies:
   override:
     - go get -d -v ./...
     - go get github.com/mitchellh/gox
-    - gox -os="windows" -output "${CIRCLE_ARTIFACTS}/${CIRCLE_PROJECT_REPONAME}_{{.OS}}_{{.Arch}}"
+    - gox -output "${CIRCLE_ARTIFACTS}/${CIRCLE_PROJECT_REPONAME}_{{.OS}}_{{.Arch}}"
     - docker info
     - docker build -t danesparza/calendar-service:$CIRCLE_BUILD_NUM .
 
