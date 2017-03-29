@@ -27,11 +27,11 @@ To test your service quickly, you can use the [Postman Google Chrome Extension](
 
 Calendar information will be returned as a [JSON payload outlined on the Google Calendar developer website](https://developers.google.com/google-apps/calendar/v3/reference/events).
 
-## Building
-### Prerequisites
+### Building
+#### Prerequisites
 *To build, make sure you have the latest version of [Go](http://golang.org/) installed.  If you've never used Go before, it's a quick install and [there are installers for multiple platforms](http://golang.org/doc/install), including Windows, Linux and OSX.*
 
-### Quick Start
+#### Quick Start
 
 Run the following commands to get latest and build.
 
