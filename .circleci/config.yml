@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version
+      - image: circleci/golang:1.9
+
+    working_directory: /go/src/github.com/danesparza/calendar-service
+    steps:
+      - checkout
+
+      - run: 
+         name: Install the 'gox' compiler tool
+         command: go get github.com/mitchellh/gox
+      
+      - run: 
+         name: Install the Github release creator tool
+         command: go get github.com/tcnksm/ghr
+
+      - run:
+         name: Get windows specific dependencies
+         command: env GOOS=windows go get -d -v ./...
+
+      - run:
+         name: Get other dependencies
+         command: go get -t -d -v ./...
+
+      - run: 
+         name: Build all artifacts
+         command: gox -output "/tmp/artifacts/{{.OS}}_{{.Arch}}/calendar-service"
+
+      - run:
+         name: Compress all artifacts
+         command: cd /tmp/artifacts;for i in */; do zip -r "${i%/}.zip" "$i"; done
+      
+      - run:
+         name: Delete temporary artifact directories
+         command: rm -rf /tmp/artifacts/*/
+
+      # Indicate we have artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+
+      # Create a release
+      - run: 
+         name: Push the release to Github
+         command: ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME v1.0.$CIRCLE_BUILD_NUM /tmp/artifacts || true
