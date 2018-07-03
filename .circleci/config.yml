@@ -27,7 +27,7 @@ jobs:
 
       - run: 
          name: Build all artifacts
-         command: gox -output "/tmp/artifacts/{{.OS}}_{{.Arch}}/calendar-service"
+         command: gox -output "/tmp/artifacts/calendar-service_{{.OS}}_{{.Arch}}/calendar-service"
 
       - run:
          name: Compress all artifacts
