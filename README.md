@@ -1,4 +1,4 @@
-# calendar-service [![Circle CI](https://circleci.com/gh/danesparza/calendar-service.svg?style=svg)](https://circleci.com/gh/danesparza/calendar-service)
+# calendar-service [![Circle CI](https://circleci.com/gh/danesparza/calendar-service.svg?style=shield)](https://circleci.com/gh/danesparza/calendar-service)
 A microservice to return Google calendar events in JSON format.  
 
 [Download the latest release for your platform here](https://github.com/danesparza/calendar-service/releases/latest)
